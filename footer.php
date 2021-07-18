@@ -17,8 +17,6 @@
 				<div class="col-md-5">
 					<img src="/wp-content/uploads/2021/07/the-black-book-logo@3x.png" alt="" class="logo">
 					<p>The Black Book was created with the purpose of finding a way for the public to locate Black crafters in our community. The idea was to help consumers find and support Black crafters in the community.</p>
-				</div>
-				<div class="col-md-6">
 					<?php
 					wp_nav_menu(array(
 							'theme_location' => 'main-menu',
@@ -30,6 +28,9 @@
 							// 'walker' => new bootstrap_5_wp_nav_menu_walker()
 					));
 					?>
+				</div>
+				<div class="col-md-6">
+
 				</div>
 			</div>
 		</div>

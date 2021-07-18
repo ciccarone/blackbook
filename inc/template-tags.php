@@ -36,6 +36,35 @@ if ( ! function_exists( 'blackbook_posted_on' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'blackbook_posted_on_var' ) ) :
+	/**
+	 * Prints HTML with meta information for the current post-date/time.
+	 */
+	function blackbook_posted_on_var() {
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		}
+
+		$time_string = sprintf(
+			$time_string,
+			esc_attr( get_the_date( DATE_W3C ) ),
+			esc_html( get_the_date() ),
+			esc_attr( get_the_modified_date( DATE_W3C ) ),
+			esc_html( get_the_modified_date() )
+		);
+
+		$posted_on = sprintf(
+			/* translators: %s: post date. */
+			esc_html_x( 'Posted on %s', 'post date', 'blackbook' ),
+			$time_string
+		);
+
+		return '<span class="posted-on mb-3 d-block">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+	}
+endif;
+
 if ( ! function_exists( 'blackbook_posted_by' ) ) :
 	/**
 	 * Prints HTML with meta information for the current author.

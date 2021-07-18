@@ -14,7 +14,12 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 			<?php $category = get_queried_object(); ?>
-			<header class="page-header frame d-flex py-5" style="background-image: url('<?php echo wp_get_attachment_image_src( get_field('category_image', 'category_'.$category->term_id), 'full' )[0] ?>')">
+			<?php if (is_month()): ?>
+				<header class="page-header frame d-flex py-5" style="background-image: url('<?php echo get_the_post_thumbnail_url(); ?>">
+			<?php else: ?>
+				<header class="page-header frame d-flex py-5" style="background-image: url('<?php echo wp_get_attachment_image_src( get_field('category_image', 'category_'.$category->term_id), 'full' )[0] ?>')">
+
+			<?php endif; ?>
 				<div class="container d-flex">
 					<div class="row align-items-center align-content-center">
 						<?php
@@ -30,8 +35,15 @@ get_header();
 				</div>
 
 			</header><!-- .page-header -->
-			<div class="container py-5">
-				<div class="row row-cols-1 row-cols-md-3 g-4">
+			<?php if (is_month()): ?>
+				<div class="">
+					<div class="">
+			<?php else: ?>
+				<div class="container py-5">
+					<div class="row row-cols-1 row-cols-md-3 g-4">
+
+			<?php endif; ?>
+
 
 
 
@@ -45,11 +57,34 @@ get_header();
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content-archive', get_post_type() );
+				if (is_month()) {?>
+					<div class="container py-5 g-0">
+						<div class="row">
+							<div class="col-md-9">
+								<?php
+								echo listing_post();
+
+								?>
+
+							</div>
+							<div class="col-md-3">
+								<?php if ( is_active_sidebar( 'blog_widgets' ) ) : ?>
+									<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+										<?php dynamic_sidebar( 'blog_widgets' ); ?>
+									</div><!-- #primary-sidebar -->
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+
+				<?php } else {
+					get_template_part( 'template-parts/content-archive', get_post_type() );
+
+				}
 
 			endwhile;
 
-			the_posts_navigation();
+			// the_posts_navigation();
 
 		else :
 

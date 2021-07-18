@@ -100,9 +100,38 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
 }
 
-.wp-block-group {
-  width: 1170px;
-  margin: 0 auto;
+.wp-block-group, .gform_wrapper, .entry-contents p, .post {
+  width: 100%;
+  padding-right: var(--bs-gutter-x,.75rem);
+  padding-left: var(--bs-gutter-x,.75rem);
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 1320px;
+  }
+
+  @media (max-width: 1170px) {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 }
 
 .carousel {
@@ -136,6 +165,18 @@
         content: "/";
         padding: .5em;
       }
+    }
+  }
+}
+
+.primary-sidebar {
+  ul {
+    margin: 0;
+  }
+
+  > div {
+    &:not(:last-child) {
+      margin-bottom: 2em;
     }
   }
 }
