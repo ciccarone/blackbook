@@ -141,9 +141,15 @@ add_action( 'widgets_init', 'blackbook_widgets_init' );
  */
 function blackbook_scripts() {
 	wp_enqueue_style( 'blackbook-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'blackbook-bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', array(), _S_VERSION );
+	wp_enqueue_style( 'blackbook-lightbox-css', get_template_directory_uri() . '/node_modules/simple-lightbox/dist/simpleLightbox.min.css', array(), _S_VERSION );
 	wp_style_add_data( 'blackbook-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'blackbook-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'blackbook-bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'blackbook-jquery-js', 'https://code.jquery.com/jquery-3.6.0.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'blackbook-lightbox-js', get_template_directory_uri() . '/node_modules/simple-lightbox/dist/simpleLightbox.min.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_script( 'blackbook-custom-js', get_template_directory_uri() . '/js/custom.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -178,3 +184,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Custom Navwalker functionality
+ */
+	require get_template_directory() . '/inc/navwalker.php';

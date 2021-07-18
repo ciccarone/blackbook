@@ -13,13 +13,27 @@ get_header();
 	<main id="primary" class="site-main">
 
 		<?php if ( have_posts() ) : ?>
+			<?php $category = get_queried_object(); ?>
+			<header class="page-header frame d-flex py-5" style="background-image: url('<?php echo wp_get_attachment_image_src( get_field('category_image', 'category_'.$category->term_id), 'full' )[0] ?>')">
+				<div class="container d-flex">
+					<div class="row align-items-center align-content-center">
+						<?php
 
-			<header class="page-header">
-				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
+						the_archive_title( '<h1 class="page-title">', '</h1>' );
+						the_archive_description( '<div class="archive-description">', '</div>' );
+						if ( function_exists('yoast_breadcrumb') ) {
+							yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+						}
+						?>
+					</div>
+
+				</div>
+
 			</header><!-- .page-header -->
+			<div class="container py-5">
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+
+
 
 			<?php
 			/* Start the Loop */
@@ -31,7 +45,7 @@ get_header();
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content', get_post_type() );
+				get_template_part( 'template-parts/content-archive', get_post_type() );
 
 			endwhile;
 
@@ -44,8 +58,10 @@ get_header();
 		endif;
 		?>
 
+	</div></div>
+
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();

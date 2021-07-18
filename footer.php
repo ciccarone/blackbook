@@ -12,19 +12,28 @@
 ?>
 
 	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'blackbook' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'blackbook' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'blackbook' ), 'blackbook', '<a href="https://tonyciccarone.com">Tony Ciccarone</a>' );
-				?>
-		</div><!-- .site-info -->
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-md-5">
+					<img src="/wp-content/uploads/2021/07/the-black-book-logo@3x.png" alt="" class="logo">
+					<p>The Black Book was created with the purpose of finding a way for the public to locate Black crafters in our community. The idea was to help consumers find and support Black crafters in the community.</p>
+				</div>
+				<div class="col-md-6">
+					<?php
+					wp_nav_menu(array(
+							'theme_location' => 'main-menu',
+							'container' => false,
+							'menu_class' => '',
+							'fallback_cb' => '__return_false',
+							'items_wrap' => '%3$s',
+							'depth' => 2,
+							// 'walker' => new bootstrap_5_wp_nav_menu_walker()
+					));
+					?>
+				</div>
+			</div>
+		</div>
+
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
